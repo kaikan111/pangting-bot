@@ -1,0 +1,36 @@
+{
+  "name": "pangting-bot",
+  "version": "1.0.0",
+  "description": "旁听生 —— 基于 NapCat / OneBot 11 的群聊机器人：人格化对话、长期记忆、群准入与管理员禁言、梗库检索、表情包、本地/在线语音、本机控制台",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/kaikan111/pangting-bot#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaikan111/pangting-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kaikan111/pangting-bot/issues"
+  },
+  "keywords": [
+    "qq",
+    "onebot",
+    "napcat",
+    "chatbot",
+    "group-chat",
+    "tts"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node --env-file=.env bot.mjs",
+    "panel": "node panel.mjs",
+    "models": "node fetch-models.mjs"
+  },
+  "dependencies": {
+    "node-edge-tts": "^1.2.11",
+    "sherpa-onnx-node": "^1.13.8",
+    "ws": "^8.18.0"
+  }
+}

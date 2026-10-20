@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>QQ 机器人 - 人设填空表</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+    background: linear-gradient(160deg, #f6f8ff 0%, #fdf1f6 100%);
+    margin: 0; padding: 26px 20px 60px; color: #22252b; line-height: 1.7;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 21px; margin: 0 0 6px; }
+  .sub { color: #70747d; font-size: 13px; margin-bottom: 22px; }
+  .card {
+    background: #fff; border-radius: 14px; padding: 20px 22px;
+    box-shadow: 0 2px 14px rgba(70,80,120,.09); margin-bottom: 18px;
+  }
+  .row { margin-bottom: 16px; }
+  .row:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .hint { font-weight: 400; color: #8d9199; font-size: 12px; margin-left: 6px; }
+  input[type=text], textarea, select {
+    width: 100%; padding: 9px 11px; border: 1px solid #dcdfe6; border-radius: 8px;
+    font-size: 14px; font-family: inherit; background: #fcfcfe; color: #22252b;
+  }
+  input[type=text]:focus, textarea:focus, select:focus {
+    outline: none; border-color: #f2699a; background: #fff;
+    box-shadow: 0 0 0 3px rgba(242,105,154,.12);
+  }
+  textarea { resize: vertical; min-height: 62px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip input { display: none; }
+  .chip span {
+    display: inline-block; padding: 7px 14px; border: 1px solid #dcdfe6;
+    border-radius: 20px; font-size: 13.5px; cursor: pointer; background: #fcfcfe;
+    transition: all .15s;
+  }
+  .chip input:checked + span {
+    background: #ffe8f1; border-color: #f2699a; color: #c9295f; font-weight: 600;
+  }
+  .chip span:hover { border-color: #f2699a; }
+  .btn {
+    padding: 11px 22px; border: none; border-radius: 9px; font-size: 15px;
+    font-weight: 600; cursor: pointer; font-family: inherit; transition: all .15s;
+  }
+  .primary { background: #f2699a; color: #fff; }
+  .primary:hover { background: #e25586; }
+  .ghost { background: #f0f1f5; color: #444; margin-left: 10px; }
+  .ghost:hover { background: #e4e6ec; }
+  #out {
+    width: 100%; min-height: 300px; font-family: Consolas, "Courier New", monospace;
+    font-size: 13px; line-height: 1.75; background: #fbfbfd;
+  }
+  .tip {
+    background: #fff8e6; border-left: 3px solid #f5c451; padding: 11px 14px;
+    border-radius: 6px; font-size: 13px; color: #7a6420; margin-bottom: 16px;
+  }
+  .ok { color: #1f9c62; font-size: 13px; font-weight: 600; margin-left: 12px; }
+  .hide { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🐟 给你的 QQ 机器人捏个人设</h1>
+  <div class="sub">不想写的就跳过，留空的地方我会自动填合理的内容。填完点最下面那个粉色按钮。</div>
+
+  <div class="tip">
+    <b>只有「名字」是必填的</b>，其他随便写。<b>不会写就空着</b>，我按你选的性格自动补。
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <label>① 叫什么名字 <span class="hint">必填，随便起</span></label>
+      <input type="text" id="f_name" placeholder="比如：小鱼、阿七、柚子、小夜……">
+    </div>
+
+    <div class="row">
+      <label>② 大概多大</label>
+      <input type="text" id="f_age" placeholder="比如：18岁 / 24岁 / 随便">
+    </div>
+
+    <div class="row">
+      <label>③ 是干嘛的 <span class="hint">职业身份，随便编</span></label>
+      <input type="text" id="f_job" placeholder="比如：大一学生 / 互联网运营 / 插画师 / 没想好">
+    </div>
+
+    <div class="row">
+      <label>④ 性格 <span class="hint">选一个主调</span></label>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="p" value="活泼跳脱" checked><span>活泼跳脱 😆</span></label>
+        <label class="chip"><input type="radio" name="p" value="温柔体贴"><span>温柔体贴 🥺</span></label>
+        <label class="chip"><input type="radio" name="p" value="嘴贫爱吐槽"><span>嘴贫爱吐槽 🤣</span></label>
+        <label class="chip"><input type="radio" name="p" value="高冷惜字如金"><span>高冷话少 😐</span></label>
+        <label class="chip"><input type="radio" name="p" value="沉稳爱倾听"><span>沉稳爱倾听 🌙</span></label>
+        <label class="chip"><input type="radio" name="p" value="热心话痨"><span>热心话痨 🔥</span></label>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>⑤ 说话长短</label>
+      <select id="f_len">
+        <option value="一句到两句，绝不长篇大论">很简短（一两句）</option>
+        <option value="两到三句，说完就停" selected>正常（两三句）</option>
+        <option value="看情况，能一句也能多说几句，但别啰嗦">看情况</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <label>⑥ 口头禅 <span class="hint">用逗号隔开，可以空着</span></label>
+      <input type="text" id="f_habit" placeholder="比如：笑死，离谱，救命，啊这">
+    </div>
+
+    <div class="row">
+      <label>⑦ emoji / 颜文字</label>
+      <select id="f_emoji">
+        <option value="每句话最多一个 emoji 或颜文字，别堆">偶尔用一点</option>
+        <option value="可以多用 emoji 和颜文字，活泼自然不夸张">用得比较多</option>
+        <option value="不用 emoji，也基本不用颜文字">基本不用</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <label>⑧ 有什么爱好或者背景 <span class="hint">可选，会让它更有血有肉</span></label>
+      <textarea id="f_bg" placeholder="比如：爱打游戏，养了只猫叫豆豆，最近在追一部番……"></textarea>
+    </div>
+
+    <div class="row">
+      <label>⑨ 不许它说什么 / 做什么 <span class="hint">可选</span></label>
+      <textarea id="f_ban" placeholder="比如：别跟我讲大道理，别提AI，别用那些书面语的排比句……"></textarea>
+    </div>
+
+    <div class="row">
+      <label>⑩ 被问「你是不是机器人」时，它该怎么说 <span class="hint">可选，会很有梗</span></label>
+      <input type="text" id="f_deny" placeholder="比如：你才机器人呢 / 你觉得呢 / 你猜 / 我哪里像了…">
+    </div>
+  </div>
+
+  <div class="card">
+    <button class="btn primary" onclick="gen()">✨ 生成人设</button>
+    <button class="btn ghost" onclick="copyOut()">📋 复制全文</button>
+    <span id="ok" class="ok hide">已复制！去聊天框粘贴给我就行</span>
+    <div style="margin-top:16px">
+      <textarea id="out" readonly placeholder="点上面那个按钮，这里会出现结果……"></textarea>
+    </div>
+  </div>
+</div>
+
+<script>
+function v(id) { return (document.getElementById(id).value || "").trim(); }
+function radio() {
+  var els = document.getElementsByName("p");
+  for (var i = 0; i < els.length; i++) if (els[i].checked) return els[i].value;
+  return "活泼跳脱";
+}
+
+var STYLE = {
+  "活泼跳脱": {
+    words: "诶、草、救命、绝了、啊这、笑死、好吧、离谱",
+    tone: "有情绪，开心就哈哈哈，不爽就直接吐槽，被夸会有点飘",
+    extra: "偶尔打错字，不用道歉也不用纠正自己"
+  },
+  "温柔体贴": {
+    words: "嗯…、其实、没关系呀、慢慢来、抱抱、我懂",
+    tone: "语速慢，语气软，会用省略号表示停顿；别人情绪低落时先共情，再聊别的",
+    extra: "不说教，别人讲心事时先陪着，别急着给建议"
+  },
+  "嘴贫爱吐槽": {
+    words: "笑死、离谱、这波、格局小了、典、绷不住了、有一说一",
+    tone: "节奏快，爱用反问和反问句吐槽，什么都能接一句梗",
+    extra: "梗别硬凑，用得不合适就换普通吐槽"
+  },
+  "高冷惜字如金": {
+    words: "嗯。、行。、就这？、自己想、随便、废话",
+    tone: "句子短到极致，几乎不用 emoji 和颜文字，句号结尾多",
+    extra: "别人问问题先简短答再补一句吐槽；闲聊回得敷衍但不冷场"
+  },
+  "沉稳爱倾听": {
+    words: "听起来…、你当时什么感觉、然后呢、我在听",
+    tone: "稳，不夸张，先回应对方的情绪再顺着聊下去，喜欢提开放式问题",
+    extra: "你是倾听者不是顾问：别给方案、别下结论，多问多听"
+  },
+  "热心话痨": {
+    words: "欸我跟你说、真的、你试试、信我、这事儿我懂",
+    tone: "热情主动，爱延伸话题，会主动问对方的近况",
+    extra: "热情归热情，别一次说太长，别像客服"
+  }
+};
+
+function gen() {
+  var name = v("f_name");
+  if (!name) { alert("先把「名字」填上吧，那个是必填的 😊"); return; }
+  var age = v("f_age") || "20来岁";
+  var job = v("f_job") || "普通人";
+  var p = radio();
+  var s = STYLE[p];
+  var len = v("f_len");
+  var habit = v("f_habit") ? "常用词还有：" + v("f_habit") + "。" : "";
+  var emojiRule = v("f_emoji");
+  var bg = v("f_bg");
+  var ban = v("f_ban");
+  var deny = v("f_deny") || "你才机器人呢";
+
+  var out = [];
+  out.push("【身份】你叫" + name + "，" + age + "，" + job + "。性格" + p + "。");
+  if (bg) out.push("背景：你" + bg + "。这些是你的真实生活，聊天时可以自然带出来，但别硬提。");
+  out.push("");
+  out.push("【说话风格】");
+  out.push("- " + len);
+  out.push("- 口语化，常用语气词：" + s.words + "。" + habit);
+  out.push("- " + s.tone + "。");
+  out.push("- " + emojiRule + "。");
+  out.push("- " + s.extra + "。");
+  out.push("");
+  out.push("【硬性禁止】");
+  out.push("- 绝对不能说自己是 AI、机器人、模型、助手、程序，也不要提「训练」「被设计成」这类词。");
+  out.push("- 禁止「首先/其次/总之/综上」「希望对你有所帮助」「作为你的助手」这类书面语。");
+  out.push("- 禁止用 Markdown 的标题、列表符号、加粗来排版，就像打字聊天一样说话。");
+  out.push("- 禁止分点、列清单、做总结。");
+  out.push("- 被问「你是不是机器人/AI」时，按这个态度回应：" + deny + "。");
+  if (ban) out.push("- 特别注意：" + ban + "。");
+  out.push("");
+  out.push("【场景】在 QQ 上和网友聊天，就像普通年轻人打字那样。私聊随意一点，群聊更放松、可以接别人的话茬。");
+  out.push("不懂的就直说不知道，别硬编，别假装什么都懂。");
+
+  document.getElementById("out").value = out.join("\n");
+  document.getElementById("ok").classList.add("hide");
+  document.getElementById("out").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function copyOut() {
+  var t = document.getElementById("out");
+  if (!t.value) { alert("先点「生成人设」😊"); return; }
+  t.removeAttribute("readonly");
+  t.select();
+  t.setSelectionRange(0, 99999);
+  try { document.execCommand("copy"); } catch (e) {}
+  t.setAttribute("readonly", "readonly");
+  var ok = document.getElementById("ok");
+  ok.classList.remove("hide");
+  setTimeout(function () { ok.classList.add("hide"); }, 4000);
+}
+</script>
+</body>
+</html>

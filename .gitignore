@@ -1,0 +1,38 @@
+# ===== 真实数据 =====
+.env
+.env.*
+!.env.example
+data/people.json
+data/groups.json
+data/voice.json
+data/panel-config.json
+data/panel-state.json
+data/panel-control.json
+data/state.json
+data/last-prompt.txt
+data/backups/
+data/voice-demo-*.wav
+data/voice-test.mp3
+data/crash.log
+
+# ===== 日志与运行态 =====
+*.log
+.bot.pid
+.panel.pid
+.guardian.pid
+.paused
+
+# ===== 素材与模型 =====
+stickers/
+voice-models/
+_ban-test/
+
+# ===== 依赖与杂物 =====
+node_modules/
+__pycache__/
+*.pyc
+*.bak*
+_*.mjs
+_*.wav
+.DS_Store
+Thumbs.db

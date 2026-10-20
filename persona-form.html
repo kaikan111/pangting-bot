@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QQ 机器人 · 人设填空表</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:#f7f8fc;margin:0;padding:20px 16px 70px;color:#22252b;line-height:1.7}
+.wrap{max-width:720px;margin:0 auto}
+h1{font-size:20px;margin:0 0 4px}
+.sub{color:#767a83;font-size:13px;margin-bottom:18px}
+.card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 12px rgba(70,80,120,.09);margin-bottom:16px}
+.card.key{border:2px solid #f2699a}
+.row{margin-bottom:15px}.row:last-child{margin-bottom:0}
+label{display:block;font-size:13.5px;font-weight:600;margin-bottom:5px}
+.hint{font-weight:400;color:#94989f;font-size:12px;margin-left:5px}
+input[type=text],textarea,select{width:100%;padding:9px 11px;border:1px solid #dcdfe6;border-radius:8px;font-size:14px;font-family:inherit;background:#fcfcfe;color:#22252b}
+input[type=text]:focus,textarea:focus,select:focus{outline:none;border-color:#f2699a;background:#fff;box-shadow:0 0 0 3px rgba(242,105,154,.13)}
+textarea{resize:vertical;min-height:60px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip input{display:none}
+.chip span{display:inline-block;padding:6px 13px;border:1px solid #dcdfe6;border-radius:20px;font-size:13px;cursor:pointer;background:#fcfcfe;transition:.15s}
+.chip input:checked+span{background:#ffe8f1;border-color:#f2699a;color:#c9295f;font-weight:600}
+.chip span:hover{border-color:#f2699a}
+.btn{padding:11px 20px;border:none;border-radius:9px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.p{background:#f2699a;color:#fff}.p:hover{background:#e25586}
+.g{background:#eef0f5;color:#444;margin-left:8px}.g:hover{background:#e2e5ec}
+#out{min-height:220px;font-family:Consolas,monospace;font-size:13px;line-height:1.7;background:#fbfbfd}
+.tip{background:#fff8e6;border-left:3px solid #f5c451;padding:10px 13px;border-radius:6px;font-size:13px;color:#7a6420;margin-bottom:15px}
+.tip.blue{background:#eef4ff;border-left-color:#6b9bf5;color:#2c4a8a}
+.status{margin-top:12px;font-size:13.5px;font-weight:600;min-height:20px}
+.ok{color:#1f9c62}.err{color:#d64545}
+.plist{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pitem{padding:7px 13px;border-radius:20px;background:#eef0f5;font-size:13px;cursor:pointer;border:1px solid transparent}
+.pitem:hover{border-color:#f2699a;background:#ffe8f1}
+.pitem.cur{background:#ffe8f1;border-color:#f2699a;font-weight:600;color:#c9295f}
+.people{list-style:none;padding:0;margin:8px 0 0}
+.people li{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fafbfe;border:1px solid #eceef4;border-radius:9px;margin-bottom:8px;font-size:13.5px}
+.people li .who{flex:1;min-width:0}
+.people li b{color:#c9295f}
+.people li .qq{color:#9aa0a8;font-size:12px;margin-left:6px}
+.people li .note{color:#767a83;font-size:12.5px;margin-top:2px;word-break:break-all}
+.people li .del{border:none;background:#f3f4f8;color:#d64545;border-radius:7px;padding:5px 10px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.people li .del:hover{background:#ffe4e4}
+.two{display:flex;gap:10px}.two>div{flex:1}
+</style></head><body><div class="wrap">
+<h1>🐟 给你的 QQ 机器人捏个人设</h1>
+<div class="sub">三步：① 填人设（不会写就空着，只有名字必填）② 填你自己的 QQ 和它会怎么叫你 ③ 点最下面那个粉色大按钮，一次全保存。</div>
+
+<div class="card">
+  <div class="row"><label>① 叫什么名字 <span class="hint">必填</span></label>
+    <input type="text" id="f_name" placeholder="比如：小鱼、阿七、柚子、小夜…"></div>
+  <div class="row"><label>② 大概多大</label><input type="text" id="f_age" placeholder="比如：18岁 / 24岁 / 随便"></div>
+  <div class="row"><label>③ 是干嘛的 <span class="hint">职业身份，随便编</span></label>
+    <input type="text" id="f_job" placeholder="比如：大一学生 / 互联网运营 / 插画师 / 没想好"></div>
+  <div class="row"><label>④ 性格 <span class="hint">选一个主调</span></label><div class="chips">
+    <label class="chip"><input type="radio" name="p" value="活泼跳脱" checked><span>活泼跳脱 😆</span></label>
+    <label class="chip"><input type="radio" name="p" value="温柔体贴"><span>温柔体贴 🥺</span></label>
+    <label class="chip"><input type="radio" name="p" value="嘴贫爱吐槽"><span>嘴贫爱吐槽 🤣</span></label>
+    <label class="chip"><input type="radio" name="p" value="高冷惜字如金"><span>高冷话少 😐</span></label>
+    <label class="chip"><input type="radio" name="p" value="沉稳爱倾听"><span>沉稳爱倾听 🌙</span></label>
+    <label class="chip"><input type="radio" name="p" value="热心话痨"><span>热心话痨 🔥</span></label>
+  </div></div>
+  <div class="row"><label>⑤ 说话长短</label><select id="f_len">
+    <option value="回话长度随机：有时一句话就完，有时连着说四五句，看当时心情和话题，别每次都一样长，也别固定两三句" selected>随机（推荐，最像真人）</option>
+    <option value="一句到两句，绝不长篇大论">很简短（一两句）</option>
+    <option value="两到三句，说完就停">固定两三句</option>
+    <option value="看情况，能一句也能多说几句，但别啰嗦">看情况</option></select></div>
+  <div class="row"><label>⑥ 口头禅 <span class="hint">逗号隔开，可空</span></label>
+    <input type="text" id="f_habit" placeholder="比如：笑死，离谱，救命，啊这"></div>
+  <div class="row"><label>⑦ emoji / 颜文字</label><select id="f_emoji">
+    <option value="每句话最多一个 emoji 或颜文字，别堆">偶尔用一点</option>
+    <option value="可以多用 emoji 和颜文字，活泼自然不夸张">用得比较多</option>
+    <option value="不用 emoji，也基本不用颜文字">基本不用</option></select></div>
+  <div class="row"><label>⑧ 爱好或背景 <span class="hint">可选，让它有血有肉</span></label>
+    <textarea id="f_bg" placeholder="比如：爱打游戏，养了只猫叫豆豆，最近在追一部番…"></textarea></div>
+  <div class="row"><label>⑨ 不许它说什么 <span class="hint">可选</span></label>
+    <textarea id="f_ban" placeholder="比如：别跟我讲大道理，别用书面排比句…"></textarea></div>
+  <div class="row"><label>⑩ 被问「你是不是机器人」怎么回 <span class="hint">可选，很有梗</span></label>
+    <input type="text" id="f_deny" placeholder="比如：你才机器人呢 / 你觉得呢 / 你猜"></div>
+</div>
+
+<div class="card">
+  <label>已有的人设（点一下直接切换，会自动重启）</label>
+  <div class="plist" id="plist">加载中…</div>
+</div>
+
+<div class="card key">
+  <label>👥 认人 <span class="hint">填你自己的，它就认你</span></label>
+  <div class="tip blue" style="margin-top:10px">
+    <b>先把你自己的 QQ 填到下面。</b>「自己人」有专属称呼、记忆永久不清；没填的话，你在他眼里就只是个陌生网友。
+  </div>
+  <ul class="people" id="ownerList"></ul>
+  <ul class="people" id="knownList"></ul>
+  <div class="two" style="margin-top:14px">
+    <div><label>QQ 号 <span class="hint">必填</span></label><input type="text" id="p_qq" placeholder="比如 10000001"></div>
+    <div><label>称呼 <span class="hint">它怎么叫你</span></label><input type="text" id="p_alias" placeholder="比如：主人 / 阿岚"></div>
+  </div>
+  <div class="row" style="margin-top:12px"><label>备注 <span class="hint">可选，它会记住</span></label>
+    <input type="text" id="p_note" placeholder="比如：是我本人，说话随意点"></div>
+  <div class="row">
+    <button class="btn p" id="btnAddOwner">⭐ 只保存「自己人」</button>
+    <button class="btn g" id="btnAddKnown">➕ 只保存「认识的」</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="tip" style="margin-top:0">
+    <b>下面这个按钮一次搞定全部</b>：人设里填了名字就保存人设，认人里填了 QQ 就保存自己人。想只改其中一样，另一个空着就行。
+  </div>
+  <button class="btn p" id="btnSave" style="width:100%;padding:15px;font-size:16px">✅ 全部保存并立刻生效</button>
+  <button class="btn g" id="btnPrev">👀 先看看人设效果</button>
+  <textarea id="out" style="margin-top:14px" placeholder="点「先看看人设效果」，生成的人设会出现在这里…"></textarea>
+  <div class="status" id="status"></div>
+</div>
+
+<script>
+var STYLE={
+"活泼跳脱":{words:"诶、草、救命、绝了、啊这、笑死、好吧、离谱",tone:"有情绪，开心就哈哈哈，不爽就直接吐槽，被夸会有点飘",extra:"偶尔打错字，不用道歉也不用纠正自己"},
+"温柔体贴":{words:"嗯…、其实、没关系呀、慢慢来、抱抱、我懂",tone:"语速慢，语气软，会用省略号表示停顿；别人情绪低落时先共情再聊别的",extra:"不说教，别人讲心事时先陪着，别急着给建议"},
+"嘴贫爱吐槽":{words:"笑死、离谱、这波、格局小了、典、绷不住了、有一说一",tone:"节奏快，爱用反问和反问句吐槽，什么都能接一句梗",extra:"梗别硬凑，用得不合适就换普通吐槽"},
+"高冷惜字如金":{words:"嗯。、行。、就这？、自己想、随便",tone:"句子短到极致，几乎不用 emoji 和颜文字，句号结尾多",extra:"别人问问题先简短答再补一句吐槽；闲聊回得敷衍但不冷场"},
+"沉稳爱倾听":{words:"听起来…、你当时什么感觉、然后呢、我在听",tone:"稳，不夸张，先回应对方的情绪再顺着聊下去，喜欢提开放式问题",extra:"你是倾听者不是顾问：别给方案、别下结论，多问多听"},
+"热心话痨":{words:"欸我跟你说、真的、你试试、信我",tone:"热情主动，爱延伸话题，会主动问对方近况",extra:"热情归热情，别一次说太长，别像客服"}
+};
+function $(id){return document.getElementById(id);}
+function v(id){return ($(id).value||"").trim();}
+function radio(){var e=document.getElementsByName("p");for(var i=0;i<e.length;i++)if(e[i].checked)return e[i].value;return "活泼跳脱";}
+function build(){
+  var name=v("f_name");
+  if(!name)return null;
+  var age=v("f_age")||"20来岁", job=v("f_job")||"普通人", p=radio(), s=STYLE[p];
+  var habit=v("f_habit")?"常用词还有："+v("f_habit")+"。":"";
+  var bg=v("f_bg"), ban=v("f_ban"), deny=v("f_deny")||"你才机器人呢";
+  var o=[];
+  o.push("【身份】你叫"+name+"，"+age+"，"+job+"。性格"+p+"。");
+  if(bg)o.push("背景：你"+bg+"。这些是你的真实生活，聊天时可以自然带出来，但别硬提。");
+  o.push("");o.push("【说话风格】");
+  o.push("- "+v("f_len"));
+  o.push("- 口语化，常用语气词："+s.words+"。"+habit);
+  o.push("- "+s.tone+"。");
+  o.push("- "+v("f_emoji")+"。");
+  o.push("- "+s.extra+"。");
+  o.push("");o.push("【硬性禁止】");
+  o.push("- 绝对不能说自己是 AI、机器人、模型、助手、程序，也不要提「训练」「被设计成」这类词。");
+  o.push("- 禁止「首先/其次/总之/综上」「希望对你有所帮助」「作为你的助手」这类书面语。");
+  o.push("- 禁止用 Markdown 的标题、列表符号、加粗来排版，就像打字聊天一样说话。");
+  o.push("- 禁止分点、列清单、做总结。");
+  o.push("- 被问「你是不是机器人/AI」时，按这个态度回应："+deny+"。");
+  if(ban)o.push("- 特别注意："+ban+"。");
+  o.push("");o.push("【场景】在 QQ 上和网友聊天，就像普通年轻人打字那样。私聊随意一点，群聊更放松、可以接别人的话茬。");
+  o.push("不懂的就直说不知道，别硬编，别假装什么都懂。");
+  return {name:name,text:o.join("\n")};
+}
+function setStatus(msg,cls){var s=$("status");s.textContent=msg;s.className="status "+(cls||"");}
+
+$("btnPrev").onclick=function(){
+  var d=build();
+  if(!d){setStatus("「① 名字」还没填，至少要有个名字才能生成人设","err");return;}
+  $("out").value=d.text;
+  setStatus("上面就是生成的人设，满意就点「✅ 全部保存并立刻生效」","ok");
+};
+
+function savePersona(){
+  var d=build();
+  if(!d)return Promise.resolve({skip:true});
+  $("out").value=d.text;
+  return fetch("/api/save",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({name:d.name,text:d.text})}).then(function(r){return r.json();});
+}
+function savePerson(kind,qq,alias,note){
+  return fetch("/api/people",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({qq:qq,alias:alias,note:note,kind:kind})}).then(function(r){return r.json();});
+}
+
+$("btnSave").onclick=function(){
+  var btn=$("btnSave");
+  var hasName=!!v("f_name");
+  var pqq=v("p_qq"), palias=v("p_alias"), pnote=v("p_note");
+  if(!hasName && !pqq){setStatus("什么都没填：人设至少填①名字，或者填一下你自己的 QQ 号","err");return;}
+  if(pqq && !/^1\d{4,11}$/.test(pqq)){setStatus("QQ 号看着不对，检查一下（应该是 5-12 位数字）","err");return;}
+
+  btn.disabled=true;
+  setStatus("正在保存…");
+  var done=[];
+  var chain=Promise.resolve();
+
+  if(pqq){
+    chain=chain.then(function(){
+      return savePerson("owner",pqq,palias||"主人",pnote).then(function(j){
+        if(j.ok){done.push("自己人 "+pqq);} else {throw new Error("认人保存失败："+(j.error||"未知"));}
+      });
+    });
+  }
+  if(hasName){
+    chain=chain.then(function(){
+      return savePersona().then(function(j){
+        if(j.ok){done.push("人设 "+j.file);} else {throw new Error("人设保存失败："+(j.error||"未知"));}
+      });
+    });
+  }
+
+  chain.then(function(){
+    setStatus("🎉 已保存："+done.join(" + ")+"　机器人已重启，去 QQ 找它说话吧","ok");
+    $("p_qq").value="";$("p_alias").value="";$("p_note").value="";
+    loadPeople();load();
+  }).catch(function(e){
+    setStatus("保存失败："+e.message,"err");
+  }).then(function(){btn.disabled=false;});
+};
+
+$("btnAddOwner").onclick=function(){quick("owner");};
+$("btnAddKnown").onclick=function(){quick("known");};
+function quick(kind){
+  var qq=v("p_qq"),alias=v("p_alias"),note=v("p_note");
+  if(!/^\d{5,12}$/.test(qq)){pStatus("QQ 号填错了","err");return;}
+  if(kind==="owner"&&!alias)alias="主人";
+  pStatus("正在保存…");
+  savePerson(kind,qq,alias,note).then(function(j){
+    if(j.ok){pStatus("🎉 记住了，立刻生效，不用重启","ok");
+      $("p_qq").value="";$("p_alias").value="";$("p_note").value="";loadPeople();}
+    else pStatus("失败："+(j.error||""),"err");
+  }).catch(function(e){pStatus("失败："+e.message,"err");});
+}
+
+function pStatus(m,c){var e=$("pstatus");if(!e)return;e.textContent=m;e.className="status "+(c||"");}
+function load(){
+  fetch("/api/personas").then(function(r){return r.json();}).then(function(j){
+    var box=$("plist");box.innerHTML="";
+    if(!j.files.length){box.textContent="还没有人设文件";return;}
+    j.files.forEach(function(f){
+      var d=document.createElement("div");
+      d.className="pitem"+(f===j.current?" cur":"");
+      d.textContent=f+(f===j.current?" ✓":"");
+      d.onclick=function(){
+        setStatus("正在切换…");
+        fetch("/api/use",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({file:f})})
+        .then(function(r){return r.json();}).then(function(x){
+          setStatus(x.ok?"🎉 已切换到 "+f+"，机器人已重启":"切换失败："+(x.error||""),x.ok?"ok":"err");load();
+        });
+      };
+      box.appendChild(d);
+    });
+  });
+}
+function personRow(p,kind){
+  var li=document.createElement("li");
+  var who=document.createElement("div");who.className="who";
+  var b=document.createElement("b");b.textContent=(p.alias||(kind==="owner"?"主人":"无名"));
+  var q=document.createElement("span");q.className="qq";q.textContent=p.qq;
+  who.appendChild(b);who.appendChild(q);
+  if(p.note){var n=document.createElement("div");n.className="note";n.textContent=p.note;who.appendChild(n);}
+  if(p.facts&&p.facts.length){var fm=document.createElement("div");fm.className="note";fm.textContent="长期记忆 "+p.facts.length+" 条";who.appendChild(fm);}
+  li.appendChild(who);
+  var del=document.createElement("button");del.className="del";del.textContent="删";
+  del.onclick=function(){
+    if(!confirm("确定要把 "+p.qq+" 忘了？"))return;
+    fetch("/api/people-del",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({qq:p.qq,kind:kind})})
+    .then(function(r){return r.json();}).then(function(){setStatus("已删除 "+p.qq,"ok");loadPeople();});
+  };
+  li.appendChild(del);
+  return li;
+}
+function loadPeople(){
+  fetch("/api/people").then(function(r){return r.json();}).then(function(j){
+    var ol=$("ownerList"),kl=$("knownList");
+    ol.innerHTML="";kl.innerHTML="";
+    if(!j.owners.length){ol.innerHTML='<li style="color:#9aa0a8">还没有自己人 —— 把你自己 QQ 填到下面</li>';}
+    else j.owners.forEach(function(p){ol.appendChild(personRow(p,"owner"));});
+    if(!j.known.length){kl.innerHTML='<li style="color:#9aa0a8">还没有认识的其他人</li>';}
+    else j.known.forEach(function(p){kl.appendChild(personRow(p,"known"));});
+  });
+}
+load();
+loadPeople();
+</script></div></body></html>
